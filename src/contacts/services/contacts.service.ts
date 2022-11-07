@@ -8,18 +8,27 @@ export class ContactsService {
     private contacts: Contact[] = [
         {
             uuid: '1',
-            usuarioUuid: '30',
-            tarea: 'Tarea de prueba'
+            usuarioUuid: '10',
+            nombre: 'Galileo',
+            apellidos: 'Galilei',
+            telefono: 93458764,
+            correo: 'galileo@galilei.com'
         },
         {
             uuid: '2',
             usuarioUuid: '20',
-            tarea: 'Tarea de prueba 2'
+            nombre: 'Robert',
+            apellidos: 'Hooke',
+            telefono: 93847509,
+            correo: 'robert@gmail.com'
         },
         {
             uuid: '3',
             usuarioUuid: '50',
-            tarea: 'Tarea de prueba 3'
+            nombre: 'Galileo',
+            apellidos: 'Galilei',
+            telefono: 93458764,
+            correo: 'galileo@galilei.com'
         }
     ];
 

@@ -1,8 +1,6 @@
-export class Contact {
+export class User {
     uuid: string;
-    usuarioUuid: string;
     nombre: string;
     apellidos?: string;
-    telefono: number;
     correo: string;
 }

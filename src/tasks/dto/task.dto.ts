@@ -1,15 +1,10 @@
-import { IsString, IsEmail, Length } from 'class-validator';
+import { IsString, Length } from 'class-validator';
 
 export class TaskDto {
-    @Length(2, 20)
     @IsString()
-    nombre: string;
+    usuarioUuid?: string;
 
-    @Length(2, 20)
+    @Length(2, 100)
     @IsString()
-    apellido?: string;
-
-    @IsEmail()
-    @IsString()
-    email: string;
+    tarea: string;
 }

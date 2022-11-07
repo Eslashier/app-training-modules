@@ -1,8 +1,14 @@
-import { IsString } from 'class-validator';
+import { IsString, IsInt, IsEmail } from 'class-validator';
 
 export class ContactDto {
     @IsString()
     usuarioUuid: string;
     @IsString()
-    tarea?: string;
+    nombre: string;
+    @IsString()
+    apellidos?: string;
+    @IsInt()
+    telefono: number;
+    @IsEmail()
+    correo: string;
 }
