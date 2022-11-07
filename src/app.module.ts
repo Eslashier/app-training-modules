@@ -6,8 +6,8 @@ import { TasksModule } from './tasks/tasks.module';
 import { ContactsModule } from './contacts/contacts.module';
 
 @Module({
-  imports: [UsersModule, TasksModule, ContactsModule],
-  controllers: [AppController],
-  providers: [AppService],
+    imports: [UsersModule, TasksModule, ContactsModule],
+    controllers: [AppController],
+    providers: [AppService]
 })
 export class AppModule {}
