@@ -15,6 +15,11 @@ export class ContactsService {
             uuid: '2',
             usuarioUuid: '20',
             tarea: 'Tarea de prueba 2'
+        },
+        {
+            uuid: '3',
+            usuarioUuid: '50',
+            tarea: 'Tarea de prueba 3'
         }
     ];
 
