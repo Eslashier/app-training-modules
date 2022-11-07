@@ -57,7 +57,7 @@ export class TasksService {
         throw new NotFoundException('Task not found');
     }
 
-    patchTask(uuid: string, task: TaskDto | TaskPatchDto): Task {
+    patchTask(uuid: string, task: TaskPatchDto): Task {
         if (this.tasks.find((task) => task.uuid === uuid)) {
             const index = this.tasks.findIndex((task) => task.uuid === uuid);
             const taskToUpdate = { ...this.tasks[index], ...task };
@@ -69,7 +69,6 @@ export class TasksService {
 
     deleteTask(uuid: string): boolean {
         if (this.tasks.find((task) => task.uuid === uuid)) {
-            // eslint-disable-next-line prettier/prettier
             const index = this.tasks.findIndex((task) => task.uuid === uuid);
             this.tasks.splice(index, 1);
             return true;

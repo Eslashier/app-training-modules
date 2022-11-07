@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Put, ValidationPipe } from '@nestjs/common';
 import { Contact } from '../entities/contact.entity';
 import { ContactsService } from '../services/contacts.service';
 import { ContactDto } from '../dto/contact.dto';
@@ -24,19 +24,20 @@ export class ContactsController {
     }
 
     @Post()
-    addContact(@Body() body: Contact): Contact {
+    // eslint-disable-next-line prettier/prettier
+    addContact(@Body(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true })) body: ContactDto): Contact {
         return this.contactsService.addContact(body);
     }
 
     @Put(`/:uuid`)
     // eslint-disable-next-line prettier/prettier
-    putContact(@Param('uuid') uuid: string, @Body() body: ContactDto): Contact | undefined{
+    putContact(@Param('uuid') uuid: string, @Body(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true })) body: ContactDto): Contact | undefined{
         return this.contactsService.putContact(uuid, body);
     }
 
     @Patch(`/:uuid`)
     // eslint-disable-next-line prettier/prettier
-    patchContact(@Param('uuid') uuid: string, @Body() body: ContactDto | ContactPatchDto): Contact | undefined{
+    patchContact(@Param('uuid') uuid: string, @Body(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true })) body:ContactPatchDto): Contact | undefined{
         return this.contactsService.patchContact(uuid, body);
     }
 

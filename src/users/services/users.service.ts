@@ -60,7 +60,7 @@ export class UsersService {
         throw new NotFoundException('User not found');
     }
 
-    patchUser(uuid: string, user: UserDto | UserPatchDto): User {
+    patchUser(uuid: string, user: UserPatchDto): User {
         if (this.users.find((user) => user.uuid === uuid)) {
             const index = this.users.findIndex((user) => user.uuid === uuid);
             const userToUpdate = { ...this.users[index], ...user };
