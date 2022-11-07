@@ -1,4 +1,4 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { UserDto } from './user.dto';
 
-export class TaskPatchDto extends PartialType(UserDto) {}
+export class UserPatchDto extends PartialType(UserDto) {}
