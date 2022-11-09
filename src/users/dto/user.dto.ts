@@ -1,15 +1,24 @@
-import { IsEmail, IsOptional, IsString, Length } from 'class-validator';
+import { IsEmail, IsOptional, IsString, IsUUID } from 'class-validator';
+import { UserInterface } from '../entities/user.interface';
+import { v4 as uuid } from 'uuid';
 
-export class UserDto {
+export class UserDto implements UserInterface {
+    @IsUUID()
+    uuid: string;
     @IsString()
-    @Length(2, 50)
-    nombre: string;
-
+    name: string;
     @IsString()
-    @Length(2, 50)
     @IsOptional()
-    apellidos?: string;
-
+    lastName?: string;
     @IsEmail()
-    correo: string;
+    email: string;
+
+    constructor(data: UserInterface) {
+        this.uuid = data.uuid ?? uuid();
+        this.name = data.name;
+        if (this.lastName) {
+            this.lastName = data.lastName;
+        }
+        this.email = data.email;
+    }
 }
