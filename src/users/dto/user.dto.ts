@@ -1,5 +1,5 @@
 import { IsEmail, IsOptional, IsString, IsUUID } from 'class-validator';
-import { UserInterface } from '../entities/user.interface';
+import { UserInterface } from '../interfaces/user.interface';
 import { v4 as uuid } from 'uuid';
 
 export class UserDto implements UserInterface {

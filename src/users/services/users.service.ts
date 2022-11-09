@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { UserPatchDto } from '../dto/user-patch.dto';
 import { UserDto } from '../dto/user.dto';
-import { User } from '../entities/user.interface';
+import { User } from '../interfaces/user.interface';
 
 @Injectable()
 export class UsersService {
