@@ -1,4 +1,4 @@
-export interface UserInterface {
+export interface UserInterfacePatch {
     name?: string;
     lastName?: string;
     email?: string;

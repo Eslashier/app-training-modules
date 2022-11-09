@@ -1,25 +1,14 @@
-import { IsEmail, IsOptional, IsString, IsUUID } from 'class-validator';
-import { UserInterface } from '../interfaces/user.interface';
-import { v4 as uuid } from 'uuid';
+import { IsEmail, IsOptional, IsString } from 'class-validator';
+import { UserInterfacePatch } from '../interfaces/user.interface-patch';
 
-export class UserDtoPatch implements UserInterface {
-    @IsUUID()
-    @IsOptional()
-    uuid: string;
+export class UserDtoPatch implements UserInterfacePatch {
     @IsString()
     @IsOptional()
-    name: string;
+    name?: string;
     @IsString()
     @IsOptional()
     lastName?: string;
     @IsEmail()
     @IsOptional()
-    email: string;
-
-    constructor(data: UserInterface) {
-        this.uuid = data.uuid ?? undefined;
-        this.name = data.name ?? undefined;
-        this.name = data.name ?? undefined;
-        this.email = data.email ?? undefined;
-    }
+    email?: string;
 }

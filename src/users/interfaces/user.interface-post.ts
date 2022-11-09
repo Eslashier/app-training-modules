@@ -1,4 +1,4 @@
-export interface UserInterface {
+export interface UserInterfacePost {
     name: string;
     lastName?: string;
     email: string;
