@@ -6,13 +6,15 @@ import {
     Param,
     Patch,
     Post,
-    Put
+    Put,
+    UseGuards
 } from '@nestjs/common';
 
 import { UsersService } from '../services/users.service';
 import { UserDto } from '../dto/user.dto';
 import { UserDtoPut } from '../dto/user-put.dto';
 import { UserDtoPatch } from '../dto/user-patch.dto';
+import { AuthorizationGuard } from '../guard/authorization.guard';
 
 @Controller('user')
 export class UsersController {
@@ -34,24 +36,28 @@ export class UsersController {
     }
 
     @Post()
+    @UseGuards(AuthorizationGuard)
     // eslint-disable-next-line prettier/prettier
     addUser(@Body() body: UserDtoPut): UserDto {
         return this.usersService.addUser(body);
     }
 
     @Put(`/:uuid`)
+    @UseGuards(AuthorizationGuard)
     // eslint-disable-next-line prettier/prettier
     putUser(@Param('uuid') uuid: string, @Body() body: UserDtoPut): UserDto | undefined{
         return this.usersService.putUser(uuid, body);
     }
 
     @Patch(`/:uuid`)
+    @UseGuards(AuthorizationGuard)
     // eslint-disable-next-line prettier/prettier
     patchUser(@Param('uuid') uuid: string, @Body() body: UserDtoPatch): UserDto | undefined{
         return this.usersService.patchUser(uuid, body);
     }
 
     @Delete(`/:uuid`)
+    @UseGuards(AuthorizationGuard)
     deleteUser(@Param('uuid') uuid: string) {
         return this.usersService.deleteUser(uuid);
     }

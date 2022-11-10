@@ -3,6 +3,7 @@ import { UserDtoPatch } from '../dto/user-patch.dto';
 import { UserDtoPut } from '../dto/user-put.dto';
 import { UserDto } from '../dto/user.dto';
 import { v4 as uuid } from 'uuid';
+import { UserInterface } from '../interfaces/user.interface';
 
 function userExist(userId: string, users: UserDto[]): boolean {
     if (users.find((user) => user.uuid === userId)) {
@@ -13,7 +14,7 @@ function userExist(userId: string, users: UserDto[]): boolean {
 
 @Injectable()
 export class UsersService {
-    private users: UserDto[] = [
+    private users: UserInterface[] = [
         {
             uuid: uuid(),
             nombre: 'Galileo',
