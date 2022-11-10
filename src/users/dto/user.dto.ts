@@ -4,11 +4,17 @@ import { UserInterface } from '../interfaces/user.interface';
 export class UserDto implements UserInterface {
     @IsUUID()
     uuid?: string;
-    @IsString()
+    @IsString({
+        message: 'Nombre debe ser de tipo string'
+    })
     nombre: string;
-    @IsString()
     @IsOptional()
+    @IsString({
+        message: 'Apellidos debe ser de tipo string'
+    })
     apellidos?: string;
-    @IsEmail()
+    @IsEmail({
+        message: 'Correo debe de tener la forma ejemplo@dominio.com'
+    })
     correo: string;
 }

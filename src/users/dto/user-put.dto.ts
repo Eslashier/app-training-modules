@@ -2,16 +2,20 @@ import { IsEmail, IsOptional, IsString } from 'class-validator';
 import { UserInterfacePatch } from '../interfaces/user.interface-patch';
 
 export class UserDtoPut implements UserInterfacePatch {
-    @IsString()
+    @IsString({
+        message: 'Nombre debe ser de tipo string'
+    })
     @IsOptional()
     nombre: string;
 
     @IsOptional()
     @IsString({
-        message: 'The field `lastname` must be of type string'
+        message: 'Apellidos debe ser de tipo string'
     })
     apellidos?: string;
-    @IsEmail()
     @IsOptional()
+    @IsEmail({
+        message: 'Correo debe de tener la forma ejemplo@dominio.com'
+    })
     correo: string;
 }

@@ -46,7 +46,7 @@ export class UsersService {
         if (userExist(uuid, this.users)) {
             return this.users.find((user) => user.uuid === uuid);
         }
-        throw new NotFoundException('User not found');
+        throw new NotFoundException(`User ${uuid} not found`);
     }
 
     addUser(user: UserDtoPut): UserDto {
@@ -63,7 +63,7 @@ export class UsersService {
             this.users[index] = { ...this.users[index], ...user };
             return this.users[index];
         }
-        throw new NotFoundException('User not found');
+        throw new NotFoundException(`User ${uuid} not found`);
     }
 
     patchUser(uuid: string, user: UserDtoPatch): UserDto | undefined {
@@ -72,7 +72,7 @@ export class UsersService {
             this.users[index] = { ...this.users[index], ...user };
             return this.users[index];
         }
-        throw new NotFoundException('User not found');
+        throw new NotFoundException(`User ${uuid} not found`);
     }
 
     deleteUser(uuid: string): boolean {
@@ -82,6 +82,6 @@ export class UsersService {
             this.users.splice(index, 1);
             return true;
         }
-        throw new NotFoundException('User not found');
+        throw new NotFoundException(`User ${uuid} not found`);
     }
 }
