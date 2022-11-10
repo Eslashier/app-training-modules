@@ -5,8 +5,11 @@ export class UserDtoPut implements UserInterfacePatch {
     @IsString()
     @IsOptional()
     nombre: string;
-    @IsString()
+
     @IsOptional()
+    @IsString({
+        message: 'The field `lastname` must be of type string'
+    })
     apellidos?: string;
     @IsEmail()
     @IsOptional()

@@ -6,8 +6,7 @@ import {
     Param,
     Patch,
     Post,
-    Put,
-    ValidationPipe
+    Put
 } from '@nestjs/common';
 
 import { UsersService } from '../services/users.service';
