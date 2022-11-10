@@ -9,10 +9,11 @@ import {
     Put,
     ValidationPipe
 } from '@nestjs/common';
-import { UserPatchDto } from '../dto/user-patch.dto';
-import { UserDto } from '../dto/user.dto';
-import { User } from '../interfaces/user.interface';
+
 import { UsersService } from '../services/users.service';
+import { UserDto } from '../dto/user.dto';
+import { UserDtoPut } from '../dto/user-put.dto';
+import { UserDtoPatch } from '../dto/user-patch.dto';
 
 @Controller('user')
 export class UsersController {
@@ -24,30 +25,30 @@ export class UsersController {
     }
 
     @Get()
-    getUsers(): User[] {
+    getUsers(): UserDto[] {
         return this.usersService.getUsers();
     }
 
     @Get(`/:uuid`)
-    getUser(@Param('uuid') uuid: string): User | undefined {
+    getUser(@Param('uuid') uuid: string): UserDto | undefined {
         return this.usersService.getUser(uuid);
     }
 
     @Post()
     // eslint-disable-next-line prettier/prettier
-    addUser(@Body(new ValidationPipe({whitelist: true, forbidNonWhitelisted:true})) body: UserDto): User {
+    addUser(@Body() body: UserDtoPut): UserDto {
         return this.usersService.addUser(body);
     }
 
     @Put(`/:uuid`)
     // eslint-disable-next-line prettier/prettier
-    putUser(@Param('uuid') uuid: string, @Body(new ValidationPipe({whitelist: true, forbidNonWhitelisted:true})) body: UserDto): User | undefined{
+    putUser(@Param('uuid') uuid: string, @Body() body: UserDtoPut): UserDto | undefined{
         return this.usersService.putUser(uuid, body);
     }
 
     @Patch(`/:uuid`)
     // eslint-disable-next-line prettier/prettier
-    patchUser(@Param('uuid') uuid: string, @Body(new ValidationPipe({whitelist: true, forbidNonWhitelisted:true})) body: UserPatchDto): User | undefined{
+    patchUser(@Param('uuid') uuid: string, @Body() body: UserDtoPatch): UserDto | undefined{
         return this.usersService.patchUser(uuid, body);
     }
 

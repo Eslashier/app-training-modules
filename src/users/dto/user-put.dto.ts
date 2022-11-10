@@ -1,14 +1,14 @@
 import { IsEmail, IsOptional, IsString } from 'class-validator';
 import { UserInterfacePatch } from '../interfaces/user.interface-patch';
 
-export class UserDtoPatch implements UserInterfacePatch {
+export class UserDtoPut implements UserInterfacePatch {
     @IsString()
     @IsOptional()
-    nombre?: string;
+    nombre: string;
     @IsString()
     @IsOptional()
     apellidos?: string;
     @IsEmail()
     @IsOptional()
-    correo?: string;
+    correo: string;
 }

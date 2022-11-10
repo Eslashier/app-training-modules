@@ -1,25 +1,33 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { UserPatchDto } from '../dto/user-patch.dto';
+import { UserDtoPatch } from '../dto/user-patch.dto';
+import { UserDtoPut } from '../dto/user-put.dto';
 import { UserDto } from '../dto/user.dto';
-import { User } from '../interfaces/user.interface';
+import { v4 as uuid } from 'uuid';
+
+function userExist(userId: string, users: UserDto[]): boolean {
+    if (users.find((user) => user.uuid === userId)) {
+        return true;
+    }
+    return false;
+}
 
 @Injectable()
 export class UsersService {
-    private users: User[] = [
+    private users: UserDto[] = [
         {
-            uuid: '1',
+            uuid: uuid(),
             nombre: 'Galileo',
             apellidos: 'Galilei',
             correo: 'galileo@galilei.com'
         },
         {
-            uuid: '2',
+            uuid: uuid(),
             nombre: 'Robert',
             apellidos: 'Hooke',
             correo: 'robert@gmail.com'
         },
         {
-            uuid: '3',
+            uuid: uuid(),
             nombre: 'Galileo',
             apellidos: 'Galilei',
             correo: 'galileo@galilei.com'
@@ -30,48 +38,45 @@ export class UsersService {
         return 'Hola desde el servicio de Users';
     }
 
-    getUsers(): User[] {
+    getUsers(): UserDto[] {
         return this.users;
     }
 
-    getUser(uuid: string): User | undefined {
-        if (this.users.find((user) => user.uuid === uuid)) {
+    getUser(uuid: string): UserDto | undefined {
+        if (userExist(uuid, this.users)) {
             return this.users.find((user) => user.uuid === uuid);
         }
         throw new NotFoundException('User not found');
     }
 
-    addUser(user: UserDto): User {
-        let userToCreate = new User();
-        const uuid = Math.floor(Math.random() * 10000000).toString();
-        userToCreate = { uuid, ...user };
-        this.users = [...this.users, userToCreate];
-        return userToCreate;
+    addUser(user: UserDtoPut): UserDto {
+        let createUser = new UserDto();
+        createUser.uuid = uuid();
+        createUser = { ...createUser, ...user };
+        this.users = [...this.users, createUser];
+        return createUser;
     }
 
-    putUser(uuid: string, user: UserDto): User | undefined {
-        if (this.users.find((user) => user.uuid === uuid)) {
+    putUser(uuid: string, user: UserDtoPut): UserDto | undefined {
+        if (userExist(uuid, this.users)) {
             const index = this.users.findIndex((user) => user.uuid === uuid);
-            let userToUpdate = new User();
-            userToUpdate = { uuid, ...user };
-            this.users[index] = userToUpdate;
+            this.users[index] = { ...this.users[index], ...user };
             return this.users[index];
         }
         throw new NotFoundException('User not found');
     }
 
-    patchUser(uuid: string, user: UserPatchDto): User {
-        if (this.users.find((user) => user.uuid === uuid)) {
+    patchUser(uuid: string, user: UserDtoPatch): UserDto | undefined {
+        if (userExist(uuid, this.users)) {
             const index = this.users.findIndex((user) => user.uuid === uuid);
-            const userToUpdate = { ...this.users[index], ...user };
-            this.users[index] = userToUpdate;
+            this.users[index] = { ...this.users[index], ...user };
             return this.users[index];
         }
         throw new NotFoundException('User not found');
     }
 
     deleteUser(uuid: string): boolean {
-        if (this.users.find((user) => user.uuid === uuid)) {
+        if (userExist(uuid, this.users)) {
             // eslint-disable-next-line prettier/prettier
             const index = this.users.findIndex((user) => user.uuid === uuid);
             this.users.splice(index, 1);

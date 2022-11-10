@@ -1,5 +1,4 @@
-export interface UserInterface {
-    uuid?: string;
+export interface UserInterfacePut {
     nombre: string;
     apellidos?: string;
     correo: string;

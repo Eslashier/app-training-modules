@@ -1,5 +1,5 @@
 export interface UserInterfacePatch {
-    name?: string;
-    lastName?: string;
-    email?: string;
+    nombre?: string;
+    apellidos?: string;
+    correo?: string;
 }
